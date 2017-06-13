@@ -7,6 +7,13 @@ from setuptools.command.test import test
 
 
 PACKAGE_DIR = 'src'
+INSTALL_REQUIRES = []
+
+
+try:
+    import psycopg2cffi
+except ImportError:
+    INSTALL_REQUIRES = ['psycopg2~=2.6']
 
 
 class PyTest(test):
@@ -31,9 +38,7 @@ setup(
     setup_requires=(
         'setuptools>=8.0',
     ),
-    install_requires=(
-        'psycopg2~=2.6',
-    ),
+    install_requires=INSTALL_REQUIRES,
     packages=find_packages(PACKAGE_DIR),
     package_dir={
         '': PACKAGE_DIR,
